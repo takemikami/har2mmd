@@ -1,0 +1,39 @@
+{
+	"name": "har2mmd",
+	"version": "0.0.0",
+	"private": true,
+	"dependencies": {
+		"@emotion/react": "latest",
+		"@emotion/styled": "latest",
+		"@mui/icons-material": "latest",
+		"@mui/material": "^5.4.4",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"mermaid": "^8.14.0",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-scripts": "latest"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"homepage": "/har2mmd/",
+	"devDependencies": {
+		"@types/mermaid": "^8.2.8"
+	}
+}
