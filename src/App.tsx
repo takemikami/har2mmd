@@ -13,6 +13,10 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import mermaid from "mermaid";
 import {har2hosts, har2mmd} from "./har2mmd";
@@ -90,18 +94,21 @@ function HarToMmd() {
             const fileReader = new FileReader();
             fileReader.onload = (e2) => {
                 if (e2 && e2.target && e2.target.result) {
+                    const mmdString = har2mmd(e2.target.result.toString(), targetHosts, targetNotes, {"compact": true})
                     const svg = mermaid.mermaidAPI.render(
                         'g-svg',
-                        har2mmd(e2.target.result.toString(), targetHosts, targetNotes, {"compact": true}),
+                        mmdString,
                         undefined
                     );
                     const svgCode = document.getElementById("g");
                     if(svgCode) svgCode.innerHTML = svg;
+                    setMmdText(mmdString)
                 }
             }
             fileReader.readAsText(fileHar);
         }
     }
+    const [mmdText, setMmdText] = React.useState('');
 
     return (
         <div>
@@ -190,6 +197,31 @@ function HarToMmd() {
                         <Button variant="outlined" onClick={handleView}>view network sequence diagram</Button>
                     </Grid>
                 </Grid>
+            </Box>
+
+            <Box sx={{ my: 2 }}>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="content-mermaid"
+                        id="header-mermaid"
+                    >
+                        <Typography>Mermaid Code</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+                            <TextField
+                                id="Mermaid-code"
+                                label="Mermaid Code"
+                                value={mmdText}
+                                multiline
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />
+                        </FormControl>
+                    </AccordionDetails>
+                </Accordion>
             </Box>
 
             <Box sx={{ my: 2 }}>
