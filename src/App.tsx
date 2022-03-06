@@ -112,38 +112,36 @@ function HarToMmd() {
 
     return (
         <div>
-            <Box sx={{ my: 2 }}>
-                <Grid container spacing={3}>
-                    <Grid item xs={3} sx={{ my: 2 }}>
-                        <Button
-                            component="label"
-                            variant="outlined"
-                        >
-                            Select har file
-                            <input
-                                type="file"
-                                hidden
-                                onChange={onChangeFileHar}
+            <Box sx={{ my: 0 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sx={{ my: 0 }}>
+                        <FormControl sx={{ m: 1, width: 300 }}>
+                            <TextField
+                                id="har-file"
+                                label="har file"
+                                value={fileHarName}
+                                variant="filled"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
                             />
-                        </Button>
+                        </FormControl>
+                        <FormControl sx={{ m: 1, mt:3, width: 300 }}>
+                            <Button
+                                component="label"
+                                variant="outlined"
+                            >
+                                Choose har file
+                                <input
+                                    type="file"
+                                    hidden
+                                    onChange={onChangeFileHar}
+                                />
+                            </Button>
+                        </FormControl>
                     </Grid>
-                    <Grid item xs={9} sx={{ my: 2 }}>
-                        <TextField
-                            id="har-file"
-                            label="har file"
-                            value={fileHarName}
-                            variant="filled"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                    </Grid>
-                </Grid>
-            </Box>
 
-            <Box sx={{ my: 2 }}>
-                <Grid container spacing={3}>
-                    <Grid item xs={5} sx={{ my: 2 }}>
+                    <Grid item xs={12} sx={{ my: 0 }}>
                         <FormControl sx={{ m: 1, width: 300 }}>
                             <InputLabel id="demo-multiple-checkbox-label">Hosts</InputLabel>
                             <Select
@@ -164,9 +162,7 @@ function HarToMmd() {
                                 ))}
                             </Select>
                         </FormControl>
-                    </Grid>
 
-                    <Grid item xs={5} sx={{ my: 2 }}>
                         <FormControl sx={{ m: 1, width: 300 }}>
                             <InputLabel id="demo-multiple-checkbox-label">Notes</InputLabel>
                             <Select
@@ -188,13 +184,11 @@ function HarToMmd() {
                             </Select>
                         </FormControl>
                     </Grid>
-                </Grid>
-            </Box>
 
-            <Box sx={{ my: 2 }}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sx={{ my: 2 }}>
-                        <Button variant="outlined" onClick={handleView}>view network sequence diagram</Button>
+                    <Grid item xs={12} sx={{ my: 0 }}>
+                        <FormControl sx={{ m: 1, width: 300 }}>
+                            <Button variant="outlined" onClick={handleView}>view network sequence diagram</Button>
+                        </FormControl>
                     </Grid>
                 </Grid>
             </Box>
