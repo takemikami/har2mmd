@@ -10,10 +10,10 @@ https://takemikami.github.io/har2mmd/
    1. Open target website in Google Chrome with developer tools.
    2. Select Network tab, and Export HAR.
 2. View network sequence by har2mmd.
-   3. Open har2mmd. https://takemikami.github.io/har2mmd/
-   4. Select har file exported from Google Chrome.
-   5. Select Host and Note.
-   6. Push View button, and view diagram below.
+   1. Open har2mmd. https://takemikami.github.io/har2mmd/
+   2. Select har file exported from Google Chrome.
+   3. Select Host and Note.
+   4. Push View button, and view diagram below.
 
 ## for developer.
 
