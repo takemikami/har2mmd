@@ -37,12 +37,17 @@ const har2entries = (har_body: string) => {
                 setCookies[kv[0]] = kv.slice(1).join('=')
             }
         }
+        var postParams = []
+        if(e["request"]["postData"]){
+            postParams = e["request"]["postData"]["params"]
+        }
         const entry = {
             "datetime": e['startedDateTime'],
             "host": host,
             "method": e["request"]["method"],
             "path": path,
             "query_params": nameValueMap(e["request"]["queryString"]),
+            "post_data": nameValueMap(postParams),
             "status": e["response"]["status"],
             "content_mime": e["response"]["content"]["mimeType"],
             "content_size": e["response"]["content"]["size"],
@@ -117,12 +122,19 @@ export const har2mmd = (har_body: string, target_hosts: Array<string>, notes : A
             mmd.push("    " + hosts[e['host']] + " -->>- visitor: " + e['status'] + " - " + e['content_mime'])
             mmd.push("  end");
         } else {
-            mmd.push("  visitor ->>+ " + hosts[e['host']] + ": " + e['path'].slice(0, 50))
+            mmd.push("  visitor ->>+ " + hosts[e['host']] + ": " + e['method'] + " " + e['path'].slice(0, 50))
             if (notes.includes("params") && Object.keys(e['query_params']).length > 0) {
                 if(notes.includes("value")) {
                     mmd.push("   Note right of visitor: [params]<br/>" + kvList(e['query_params']).join("<br/>"))
                 } else {
                     mmd.push("   Note right of visitor: [params]<br/>" + Object.keys(e['query_params']).join("<br/>"))
+                }
+            }
+            if (notes.includes("params") && Object.keys(e['post_data']).length > 0) {
+                if(notes.includes("value")) {
+                    mmd.push("   Note right of visitor: [post]<br/>" + kvList(e['post_data']).join("<br/>"))
+                } else {
+                    mmd.push("   Note right of visitor: [post]<br/>" + Object.keys(e['post_data']).join("<br/>"))
                 }
             }
             if (notes.includes("send_cookies") && Object.keys(e['send_cookies']).length > 0) {
