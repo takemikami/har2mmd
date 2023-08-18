@@ -39,7 +39,9 @@ const har2entries = (har_body: string) => {
         }
         var postParams = []
         if(e["request"]["postData"]){
-            postParams = e["request"]["postData"]["params"]
+            if(e["request"]["postData"]["params"]){
+                postParams = e["request"]["postData"]["params"]
+            }
         }
         const entry = {
             "datetime": e['startedDateTime'],
